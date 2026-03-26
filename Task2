@@ -1,0 +1,53 @@
+using System;
+class Person
+{
+    public string Name { get; set; }
+    public Person(string Name){
+        this.Name = Name;
+    }
+    public override string ToString()
+    {
+        return Name;
+    }
+}
+class Student : Person
+{
+    public Student(string Name) : base(Name) { }
+    public void Study()
+    {
+        Console.WriteLine(Name + " is Studying");
+    }
+}
+class Teacher : Person
+{
+    public Teacher(string Name) : base(Name) { }
+    public void Explain()
+    {
+        Console.WriteLine(Name + " is Explaning");
+    }
+}
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Person[] p = new Person[3];
+        Console.WriteLine("Enter 1st Student Name - ");
+        p[0] = new Student(Console.ReadLine());
+        Console.WriteLine("Enter 2nd Student Name -");
+        p[1] = new Student(Console.ReadLine());
+        Console.WriteLine("Enter Teacher Name -");
+        p[2] = new Teacher(Console.ReadLine());
+
+        foreach(Person person in p)
+        {
+            if (person is Student s)
+            {
+                s.Study();
+            }
+            else if (person is Teacher t)
+            {
+                t.Explain();
+            }
+        }
+    }
+}

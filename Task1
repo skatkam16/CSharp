@@ -1,0 +1,32 @@
+class Person
+{
+    public string Name { get; set; }
+    public Person(String name){
+        Name = name;
+    }
+    ~Person() 
+    {
+        Name = "";
+    }
+    public override string ToString()
+    {
+        return "Person Name "+Name+"";
+    }
+}
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Person[] p = new Person[3];
+        for(int i = 0; i < 3; i++)
+        {
+            Console.WriteLine("Enter Name");
+            string name = Console.ReadLine();
+            p[i] = new Person(name);
+        }
+        foreach (Person person in p)
+        {
+            Console.WriteLine(person.ToString());
+        }
+    }
+}

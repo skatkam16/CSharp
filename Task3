@@ -1,0 +1,53 @@
+using System;
+interface IVehicle
+{
+    void Drive();
+    bool Refuel(int amount);
+}
+class Car : IVehicle
+{
+    private int fuel;
+    public Car(int fuel)
+    {
+        this.fuel = fuel;
+    }
+    public void Drive()
+    {
+        if (fuel > 0)
+        {
+            Console.WriteLine("Driving");
+        }
+        else{
+            Console.WriteLine("No Gas Cannot Drive");
+        }
+    }
+    public bool Refuel(int amount)
+    {
+        fuel += amount;
+        return true;
+    }
+
+}
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Car c =new Car(0);
+        try
+        {
+            Console.WriteLine("Enter Fuel Amount");
+            int amount = int.Parse(Console.ReadLine());
+            c.Refuel(amount);
+            c.Drive();
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Only Valid Integer");
+        }
+        catch (OverflowException)
+        {
+            Console.WriteLine("Int Length is too Long");
+        }
+        Console.ReadKey();
+    }
+}

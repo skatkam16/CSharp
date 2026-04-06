@@ -1,33 +1,44 @@
-abstract class Animal
-{
-    public string Name { get; set; }
-    public void setName(string name)
-    {
-        Name = name;
-    }
-    public String GetName()
-    {
-        return Name;
-    }
-    public abstract void Eat();
-}
-class Dog : Animal
-{
-    public override void Eat()
-    {
-        Console.WriteLine("The Dog is Eating");
-    }
-}
-class Program
-{
-    public static void Main(string[] args)
-    {
-        Console.WriteLine("Enetr the Dog Name - ");
-        string dogname = Console.ReadLine();
-        Dog d = new Dog();
-        d.setName(dogname);
-        Console.WriteLine("Dog Name is " + d.GetName());
-        d.Eat();
+using System;
 
+namespace AnimalApp
+{
+    abstract class Animal
+    {
+        public string Name { get; set; }
+
+        public void SetName(string name)
+        {
+            Name = name;
+        }
+
+        public string GetName()
+        {
+            return Name;
+        }
+
+        public abstract void Eat();
+    }
+
+    class Dog : Animal
+    {
+        public override void Eat()
+        {
+            Console.WriteLine("The Dog is Eating");
+        }
+    }
+
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the Dog Name - ");
+            string dogName = Console.ReadLine();
+
+            Dog d = new Dog();
+            d.SetName(dogName);
+
+            Console.WriteLine("Dog Name is " + d.GetName());
+            d.Eat();
+        }
     }
 }

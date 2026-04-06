@@ -1,16 +1,43 @@
-class Program
+using System;
+using System.Timers;
+namespace MultiplicationApp
 {
-    public static void Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Enter 1st Num");
-        int a =int.Parse(Console.ReadLine());
-        Console.WriteLine("Enter 2nd Num");
-        int b =int.Parse(Console.ReadLine());
-        int mul = 0;
-        for (int i = 0; i < b; i++)
+        public static void Main(string[] args)
         {
-            mul = mul + a;
+            try
+            {
+                int a; int b;
+                Console.WriteLine("Enter 1st Number:");
+                while (!int.TryParse(Console.ReadLine(), out a))
+                {
+                    Console.Write("Invalid input. Enter a valid integer: ");
+                }
+                Console.WriteLine("Enter 2nd Number:");
+                while (!int.TryParse(Console.ReadLine(), out b))
+                {
+                    Console.Write("Invalid input. Enter a valid integer: ");
+                }
+
+                int mul = 0;
+                for (int i = 0; i < times; i++)
+                {
+                    checked
+                    {
+                        mul += a;
+                    }
+                }
+                Console.WriteLine("Multiplication is " + mul);
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Error: Number is too large Overflow occurred.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unexpected error: " + ex.Message);
+            }
         }
-        Console.WriteLine("Multiplication is " + mul);
     }
 }

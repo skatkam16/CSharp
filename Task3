@@ -1,53 +1,75 @@
 using System;
-interface IVehicle
+
+namespace MyApp
 {
-    void Drive();
-    bool Refuel(int amount);
-}
-class Car : IVehicle
-{
-    private int fuel;
-    public Car(int fuel)
+    interface IVehicle
     {
-        this.fuel = fuel;
-    }
-    public void Drive()
-    {
-        if (fuel > 0)
-        {
-            Console.WriteLine("Driving");
-        }
-        else{
-            Console.WriteLine("No Gas Cannot Drive");
-        }
-    }
-    public bool Refuel(int amount)
-    {
-        fuel += amount;
-        return true;
+        void Drive();
+        bool Refuel(int amount);
     }
 
-}
-class Program
-{
-    public static void Main(string[] args)
+    class Car : IVehicle
     {
-        Car c =new Car(0);
-        try
+        private int fuel;
+
+        public Car(int fuel)
         {
-            Console.WriteLine("Enter Fuel Amount");
-            int amount = int.Parse(Console.ReadLine());
-            c.Refuel(amount);
-            c.Drive();
+            this.fuel = fuel;
         }
-        catch (FormatException)
+        public void Drive()
         {
-            Console.WriteLine("Only Valid Integer");
+            if (fuel > 0)
+            {
+                Console.WriteLine("Car is Driving");
+            }
+            else
+            {
+                Console.WriteLine("No fuel. Cannot drive.");
+            }
         }
-        catch (OverflowException)
+
+        public bool Refuel(int amount)
         {
-            Console.WriteLine("Int Length is too Long");
+            if (amount <= 0)
+            {
+                Console.WriteLine("Fuel must be positive.");
+                return false;
+            }
+
+            fuel += amount;
+            return true;
         }
-        Console.ReadKey();
+    }
+
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            Car car = new Car(0);
+
+            try
+            {
+                Console.WriteLine("Enter fuel amount:");
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out int amount))
+                {
+                    bool result = car.Refuel(amount);
+
+                    if (result)
+                    {
+                        car.Drive();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Enter a valid integer.");
+                }
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Number is too large.");
+            }
+        }
     }
 }

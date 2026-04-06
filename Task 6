@@ -1,34 +1,52 @@
-class Program
+using System;
+using System.IO;
+namespace FileHandlingExample
 {
-    public static void Main(string[] args)
+    class Program
     {
-        string sourceFile = "input.txt";
-        string destinationFile = "output.txt";
-
-        try
+        public static void Main(string[] args)
         {
-            // Step 1: Ask user for input
-            Console.WriteLine("Enter some text:");
-            string userInput = Console.ReadLine();
+            string sourceFile = "input.txt";
+            string destinationFile = "output.txt";
 
-            // Step 2: Create file and write data
-            File.WriteAllText(sourceFile, userInput);
-            Console.WriteLine("File created and data written.");
+            try
+            {
+                // Step 1: Ask user for input
+                Console.WriteLine("Enter some text:");
+                string userInput = Console.ReadLine();
+                if(string.IsNullOrEmpty(userInput))
+                {
+                    Console.WriteLine("No input provided. Exiting.");
+                    return;
+                }
 
-            // Step 3: Read file
-            string content = File.ReadAllText(sourceFile);
+                // Step 2: Create file and write data
+                File.WriteAllText(sourceFile, userInput);
+                Console.WriteLine("File created and data written.");
 
-            // Step 4: Convert to uppercase
-            string upperContent = content.ToUpper();
+                // Step 3: Read file
+                string content = File.ReadAllText(sourceFile);
 
-            // Step 5: Write to another file
-            File.WriteAllText(destinationFile, upperContent);
+                // Step 4: Convert to uppercase
+                string upperContent = content.ToUpper();
 
-            Console.WriteLine("File copied to output.txt with uppercase text.");
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("Error: " + e.Message);
+                // Step 5: Write to another file
+                File.WriteAllText(destinationFile, upperContent);
+
+                Console.WriteLine("File copied to output.txt with uppercase text.");
+            }
+            catch (IOException ioEx)
+            {
+                Console.WriteLine("File Error: " + ioEx.Message);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                Console.WriteLine("Access Error: " + ex.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred: " + e.Message);
+            }
         }
     }
 }

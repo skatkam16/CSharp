@@ -1,32 +1,40 @@
-class Person
+using System;
+
+namespace MyApp
 {
-    public string Name { get; set; }
-    public Person(String name){
-        Name = name;
-    }
-    ~Person() 
+    class Person
     {
-        Name = "";
-    }
-    public override string ToString()
-    {
-        return "Person Name "+Name+"";
-    }
-}
-class Program
-{
-    public static void Main(string[] args)
-    {
-        Person[] p = new Person[3];
-        for(int i = 0; i < 3; i++)
+        public string Name { get; set; }
+
+        public Person(string name)
         {
-            Console.WriteLine("Enter Name");
-            string name = Console.ReadLine();
-            p[i] = new Person(name);
+            Name = name;
         }
-        foreach (Person person in p)
+
+        public override string ToString()
         {
-            Console.WriteLine(person.ToString());
+            return "Person Name: " + Name;
+        }
+    }
+
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            Person[] p = new Person[3];
+
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine("Enter Name:");
+                string name = Console.ReadLine() ?? "";
+                p[i] = new Person(name);
+            }
+
+            Console.WriteLine("\n People entered:");
+            foreach (Person person in p)
+            {
+                Console.WriteLine(person.ToString());
+            }
         }
     }
 }

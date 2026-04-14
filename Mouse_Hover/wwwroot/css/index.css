@@ -1,0 +1,17 @@
+﻿
+<style >
+.myButton {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.myButton:hover {
+    background-color: yellow;
+    color: black;
+}
+
+</style >

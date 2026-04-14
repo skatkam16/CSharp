@@ -1,0 +1,75 @@
+using System;
+
+namespace MyApp
+{
+    interface IVehicle
+    {
+        void Drive();
+        bool Refuel(int amount);
+    }
+
+    class Car : IVehicle
+    {
+        private int fuel;
+
+        public Car(int fuel)
+        {
+            this.fuel = fuel;
+        }
+        public void Drive()
+        {
+            if (fuel > 0)
+            {
+                Console.WriteLine("Car is Driving");
+            }
+            else
+            {
+                Console.WriteLine("No fuel. Cannot drive.");
+            }
+        }
+
+        public bool Refuel(int amount)
+        {
+            if (amount <= 0)
+            {
+                Console.WriteLine("Fuel must be positive.");
+                return false;
+            }
+
+            fuel += amount;
+            return true;
+        }
+    }
+
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            Car car = new Car(0);
+
+            try
+            {
+                Console.WriteLine("Enter fuel amount:");
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out int amount))
+                {
+                    bool result = car.Refuel(amount);
+
+                    if (result)
+                    {
+                        car.Drive();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Enter a valid integer.");
+                }
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Number is too large.");
+            }
+        }
+    }
+}

@@ -1,0 +1,80 @@
+using System;
+
+namespace MyApp
+{
+    class Person
+    {
+        public string Name { get; set; }
+
+        public Person(string name)
+        {
+            Name = name;
+        }
+
+        public override string ToString()
+        {
+            return "Person Name: " + Name;
+        }
+    }
+
+    class Student : Person
+    {
+        public Student(string name) : base(name)
+        {
+        }
+
+        public void Study()
+        {
+            Console.WriteLine(Name + " is studying");
+        }
+    }
+
+    class Teacher : Person
+    {
+        public Teacher(string name) : base(name)
+        {
+        }
+
+        public void Explain()
+        {
+            Console.WriteLine(Name + " is explaining");
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Person[] people = new Person[3];
+
+            // Input: 2 Students
+            for (int i = 0; i < 2; i++)
+            {
+                Console.WriteLine("Enter Student Name:");
+                string name = Console.ReadLine() ?? "";
+                people[i] = new Student(name);
+            }
+
+            // Input: 1 Teacher
+            Console.WriteLine("Enter Teacher Name:");
+            string teacherName = Console.ReadLine() ?? "";
+            people[2] = new Teacher(teacherName);
+
+            Console.WriteLine("\n--- Output ---");
+
+            foreach (Person person in people)
+            {
+                Console.WriteLine(person.ToString());
+
+                if (person is Student student)
+                {
+                    student.Study();
+                }
+                else if (person is Teacher teacher)
+                {
+                    teacher.Explain();
+                }
+            }
+        }
+    }
+}
